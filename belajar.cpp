@@ -37,4 +37,6 @@ int menu, pesanan, kopi, susu, teh, total;
   cout << "------------------------------" << endl;
   total = harga*jumlah;
   cout << " Total Biaya Pesanan Anda Adalah = " << total << endl;
+  
+  return 0;
 }
