@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string.h>
-
+using namespace std;
 int main (){
-int menu, pesanan, kopi, susu, teh, total;
+int pesanan, total, harga, jumlah;
   
   
   cout << "===== Menu Viery de Cafee =====" << endl;
@@ -17,15 +17,15 @@ int menu, pesanan, kopi, susu, teh, total;
   cin >> pesanan;
   if (pesanan == 1) {
     cout << " Kopi Rp 5.000 " << endl;
-    harga = 5.000;
+    harga = 5000;
   }
   else if (pesanan == 2) {
     cout << " Susu Rp 6.000 " << endl;
-    harga = 6.000;
+    harga = 6000;
   }
   else if (pesanan == 3) {
     cout << " Teh Rp 4.000 " << endl;
-    harga = 4.000;
+    harga = 4000;
   }
   else {
     cout << " Pesanan Tidak Tersedia " << endl;
@@ -36,7 +36,7 @@ int menu, pesanan, kopi, susu, teh, total;
   
   cout << "------------------------------" << endl;
   total = harga*jumlah;
-  cout << " Total Biaya Pesanan Anda Adalah = " << total << endl;
+  cout << " Total Biaya Pesanan Anda Adalah = Rp " << total << endl;
   
   return 0;
 }
