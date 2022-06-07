@@ -265,11 +265,13 @@ function EditBuku(bookId) {
   for (bookItem of books) {
     if (bookItem.id === bookId) {
       // tangkap value inputEdit
-      const idBook = document.querySelector("#inputEditBookId");
       const titleBaru = document.querySelector("#inputEditBookTitle");
       const authorBaru = document.querySelector("#inputEditBookAuthor");
       const yearBaru = document.querySelector("#inputEditBookYear");
       
+      // save id book to local storage
+      localStorage.setItem('id_on_edit', bookId);
+
       // replace value
       titleBaru.value = bookItem.book ;
       authorBaru.value = bookItem.author ;
@@ -285,12 +287,13 @@ let editBook = document.getElementById('editBookBaru');
 editBook.addEventListener('submit', function(e) {
 
   e.preventDefault();
-  const idBuku = document.querySelector('#inputEditBookId').value;
   const judulBuku = document.querySelector('#inputEditBookTitle').value;
   const penulis = document.querySelector('#inputEditBookAuthor').value;
   const tahunBuku = document.querySelector('#inputEditBookYear').value;
 
-  let id = parseInt(idBuku)
+  // get id book from local storage
+  let idBook = localStorage.getItem('id_on_edit');
+  id = parseInt(idBook);
 
   for (bookItem of books) {
     if (bookItem.id === id) {
