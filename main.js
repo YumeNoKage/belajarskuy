@@ -44,18 +44,21 @@ function buatBuku(bookObject) {
 
   const tombolHapus = document.createElement("button");
   tombolHapus.classList.add("red");
-  tombolHapus.innerHTML = "           <box-icon name='trash'></box-icon>" + " <p>Hapus buku</p>";
+  tombolHapus.innerHTML = "<box-icon name='trash'></box-icon>" + " <p>Hapus buku</p>";
   tombolHapus.addEventListener("click", function () {
     hapusBukuFromCompleted(bookObject.id);
   });
 
   const btnEditBuku = document.createElement("button");
   btnEditBuku.classList.add("blue");
+  btnEditBuku.setAttribute("id", `edit-${bookObject.id}`);
   btnEditBuku.innerHTML = "<box-icon name='edit-alt'></box-icon>" + "<p>Edit buku</p>";
+  let self = this;
   btnEditBuku.addEventListener("click", function () {
     const cardEdit = document.querySelector(".editBook");
     cardEdit.style.display = "flex";
-    s;
+    self.EditBuku(bookObject.id);
+    // s;
   });
   container.append(btnEditBuku);
 
@@ -262,20 +265,42 @@ function EditBuku(bookId) {
   for (bookItem of books) {
     if (bookItem.id === bookId) {
       // tangkap value inputEdit
-      const titleBaru = document.querySelector("#inputEditBookTitle").value;
-      const authorBaru = document.querySelector("#inputEditBookAuthor").value;
-      const yearBaru = document.querySelector("#inputEditBookYear").value;
+      const idBook = document.querySelector("#inputEditBookId");
+      const titleBaru = document.querySelector("#inputEditBookTitle");
+      const authorBaru = document.querySelector("#inputEditBookAuthor");
+      const yearBaru = document.querySelector("#inputEditBookYear");
+      
       // replace value
-      bookItem.book = titleBaru;
-      bookItem.author = authorBaru;
-      bookItem.year = yearBaru;
-      // const generatedId = generateId();
-      // const bookObject = generateBookObject(judulBuku, penulis, +tahunBuku, selesaiDiBaca);
-      // books.push(bookObject);
-
-      // document.dispatchEvent(new Event(RENDER_EVENT));
-      // saveData();
+      titleBaru.value = bookItem.book ;
+      authorBaru.value = bookItem.author ;
+      yearBaru.value = bookItem.year ;
+      idBook.value = bookItem.id ;
     }
   }
   return null;
 }
+
+// save edited book 
+let editBook = document.getElementById('editBookBaru');
+editBook.addEventListener('submit', function(e) {
+
+  e.preventDefault();
+  const idBuku = document.querySelector('#inputEditBookId').value;
+  const judulBuku = document.querySelector('#inputEditBookTitle').value;
+  const penulis = document.querySelector('#inputEditBookAuthor').value;
+  const tahunBuku = document.querySelector('#inputEditBookYear').value;
+
+  let id = parseInt(idBuku)
+
+  for (bookItem of books) {
+    if (bookItem.id === id) {
+      // replace value
+      bookItem.book = judulBuku;
+      bookItem.author = penulis;
+      bookItem.year = tahunBuku;
+    }
+  }
+  
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
+});
